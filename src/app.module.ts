@@ -37,9 +37,13 @@ import { Cours } from './Cours/cours.entity';
                   Disponibilite, Matiere, Mention, 
                   Parcours, Niveau, Classe, Salle, Cours] ,
       synchronize: false,
-      migrations: ['src/Migrations/*.ts'],
+      migrations: [__dirname + '/Migrations/*{.ts,.js}'],    //   migrations: [__dirname + '/Migrations/*{.ts,.js}'],
 
     }),
+    TypeOrmModule.forFeature([Utilisateur, Etudiant, Enseignant,
+      Disponibilite, Matiere, Mention, 
+      Parcours, Niveau, Classe, Salle, Cours]),
+
     AuthModule,
     MentionModule,
     ParcoursModule,

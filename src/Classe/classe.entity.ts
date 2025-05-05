@@ -1,7 +1,7 @@
-import { Cours } from "src/Cours/cours.entity";
-import { Niveau } from "src/Niveau/niveau.entity";
-import { Parcours } from "src/Parcours/parcours.entity";
-import { Etudiant } from "src/Utilisateur/Etudiant/etudiant.entity";
+import { Cours } from "../Cours/cours.entity";
+import { Niveau } from "../Niveau/niveau.entity";
+import { Parcours } from "../Parcours/parcours.entity";
+import { Etudiant } from "../Utilisateur/Etudiant/etudiant.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 
 @Entity()
@@ -29,7 +29,7 @@ export class Classe{
  
 }
 
-export enum group {
+ enum group {
     gp1 = 1,
     gp2 = 2
 }

@@ -1,5 +1,5 @@
-import { Cours } from "src/Cours/cours.entity";
-import { Enseignant } from "src/Utilisateur/Enseignant/enseignant.entity";
+import { Cours } from "../Cours/cours.entity";
+import { Enseignant } from "../Utilisateur/Enseignant/enseignant.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

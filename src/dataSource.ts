@@ -11,7 +11,7 @@ import { Parcours } from './Parcours/parcours.entity';
 import { Mention } from './Mention/mention.entity';
 import { Salle } from './Salle/salle.entity';
 
-export const AppDataSource = new DataSource({
+export default new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: 5432,
@@ -31,6 +31,6 @@ export const AppDataSource = new DataSource({
     Niveau,
     Cours,
   ],
-  migrations: ['src/Migrations/*.ts'],
-  synchronize: false,
+  migrations: [__dirname + '/Migrations/*{.ts,.js}'],
+    synchronize: false,
 });

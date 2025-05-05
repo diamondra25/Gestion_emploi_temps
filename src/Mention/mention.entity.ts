@@ -1,4 +1,4 @@
-import { Parcours } from "src/Parcours/parcours.entity";
+import { Parcours } from "../Parcours/parcours.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

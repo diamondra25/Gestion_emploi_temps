@@ -1,5 +1,5 @@
-import { Classe } from "src/Classe/classe.entity";
-import { Mention } from "src/Mention/mention.entity";
+import { Classe } from "../Classe/classe.entity";
+import { Mention } from "../Mention/mention.entity";
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

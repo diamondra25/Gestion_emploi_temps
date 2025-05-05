@@ -7,14 +7,8 @@ export class Utilisateur{
     @PrimaryGeneratedColumn()
     id_utilisateur: number;
 
-    @Column()
+    @Column({unique:true})
     email :string;
-
-    @Column()
-    nom: string;
-
-    @Column()
-    prenom :string;
 
     @Column()
     mot_passe : string;
@@ -22,7 +16,7 @@ export class Utilisateur{
     @Column()
     role: Role;
 
-    @Column()
+    @Column({default: false})
     approuve: boolean
 
     @OneToOne(()=>Enseignant, (enseignant)=>enseignant.utilisateur)
@@ -34,7 +28,7 @@ export class Utilisateur{
     etudiant? : Etudiant;
 }
 
-export enum Role {
+ enum Role {
     ETUDIANT = 'etudiant',
     ENSEIGNANT = 'enseignant',
     ADMIN = 'admin'

@@ -1,4 +1,4 @@
-import { Classe } from "src/Classe/classe.entity";
+import { Classe } from "../Classe/classe.entity";
 import { Entity, OneToMany, PrimaryColumn } from "typeorm";
 
 @Entity()

@@ -1,4 +1,4 @@
-import { Enseignant } from "src/Utilisateur/Enseignant/enseignant.entity";
+import { Enseignant } from "../Utilisateur/Enseignant/enseignant.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

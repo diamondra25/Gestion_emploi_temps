@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { MentionController } from "./mention.controller";
-import { MentionService } from "./module.service";
+import { MentionService } from "./mention.service";
 
 @Module({
     controllers : [MentionController],
