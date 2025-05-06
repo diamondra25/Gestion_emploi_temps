@@ -1,4 +1,4 @@
-import { Cours } from "../Cours/cours.entity";
+import { Classe } from "../Classe/classe.entity";
 import { Enseignant } from "../Utilisateur/Enseignant/enseignant.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -14,6 +14,6 @@ export class Matiere{
     @JoinColumn()
     enseignant : Enseignant;
 
-    @OneToMany(()=>Cours, (cours)=>cours.matiere)
-    cours : Cours[];
+    @OneToMany(()=>Classe, (classe)=>classe.matiere)
+    classe :Classe[]
 }

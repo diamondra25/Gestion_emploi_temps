@@ -6,6 +6,11 @@ import { Disponibilite } from "./disponibilite.entity";
 export class DisponibiliteController{
     constructor(private disponibiliteService : DisponibiliteService){}
 
+    @Get()
+    async getAllDisponibility() {
+        return this.disponibiliteService.findAll();
+    }
+    
     @Get('this-week/:id_enseignant')
     async getDisponibilityThisWeek(id_enseignant: number) {
         return this.disponibiliteService.findDisponibilityThisWeek(id_enseignant);
@@ -16,17 +21,17 @@ export class DisponibiliteController{
         return this.disponibiliteService.findDisponibilityforSpecificWeek(id_enseignant, date);
     }
 
-    @Post('create')
+    @Post()
     async createDisponibility( @Body() disponibilite: Disponibilite) {
         return this.disponibiliteService.create(disponibilite);
     }
 
-    @Put('update/:id')
+    @Put(':id')
     async updateDisponibility(id: number, disponibilite: Disponibilite) {
         return this.disponibiliteService.update(id, disponibilite);
     }
 
-    @Delete('delete/:id')
+    @Delete(':id')
     async deleteDisponibility(id: number) {
         return this.disponibiliteService.delete(id);
     }

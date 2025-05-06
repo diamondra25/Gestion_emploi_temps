@@ -16,9 +16,6 @@ export class Etudiant{
     @Column ()
     titre : Titre
 
-    @OneToOne(()=>Utilisateur, (utilisateur)=>utilisateur.etudiant)
-    utilisateur: Utilisateur
-
     @ManyToOne(()=>Classe, (classe)=>classe.etudiant)
     classe :Classe;
 

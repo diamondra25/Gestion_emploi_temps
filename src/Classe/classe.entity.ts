@@ -1,3 +1,4 @@
+import { Matiere } from "../Matiere/matiere.entity";
 import { Cours } from "../Cours/cours.entity";
 import { Niveau } from "../Niveau/niveau.entity";
 import { Parcours } from "../Parcours/parcours.entity";
@@ -20,6 +21,9 @@ export class Classe{
 
     @ManyToOne(()=>Niveau, (niveau)=>niveau.classe)
     niveau : Niveau;
+
+    @ManyToOne(()=>Matiere, (matiere)=>matiere.classe)
+    matiere : Matiere;
 
     @OneToMany(()=>Etudiant, (etudiant)=>etudiant.classe)
     etudiant :Etudiant [];

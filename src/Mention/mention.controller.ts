@@ -12,12 +12,12 @@ export class MentionController{
     }
 
     @Get('getAllParcoursforMention/:id_mention')
-    async getAllParcoursforMention(@Param('id_mention') id_mention: number): Promise<Mention[]> {
+    async getAllParcoursforMention(@Param('id_mention') id_mention: number ): Promise<Mention[]> {
         return this.mentionService.getAllParcoursforMention(id_mention);
     }
 
     @Post()
-    async createMention(@Body() mention: Mention): Promise<Mention> {
+    async createMention(@Body() mention: Partial<Mention>): Promise<Mention> {
         return this.mentionService.createMention(mention);
     }
 

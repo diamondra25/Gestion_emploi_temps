@@ -1,5 +1,4 @@
 import { Classe } from "../Classe/classe.entity";
-import { Matiere } from "../Matiere/matiere.entity";
 import { Salle } from "../Salle/salle.entity";
 import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
@@ -34,9 +33,6 @@ export class Cours{
 
     @ManyToOne(()=>Salle, (salle)=> salle.cours)
     salle :Salle;
-
-    @ManyToOne(()=>Matiere, (matiere)=> matiere.cours)
-    matiere :Classe;
 
 }
 

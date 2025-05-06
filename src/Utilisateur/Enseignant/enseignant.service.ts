@@ -5,6 +5,9 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class EnseignantService{
+    save(enseignant: Promise<Enseignant>) {
+        throw new Error("Method not implemented.");
+    }
      constructor(
                 @InjectRepository(Enseignant)
                 private enseignantRepository: Repository<Enseignant>,
@@ -21,9 +24,11 @@ export class EnseignantService{
                 }
                 return etudiant;
             }
-    Et
-            async create(enseignant: Partial<Enseignant>): Promise<Enseignant> {
-                return this.enseignantRepository.save(enseignant);
+
+            async create(data: Partial<Enseignant>): Promise<Enseignant> {
+                const enseignant = this.enseignantRepository.create(data);
+                return await this.enseignantRepository.save(enseignant);
+                
               }
             
               async update(id: number, enseignant: Partial<Enseignant>): Promise<Enseignant> {

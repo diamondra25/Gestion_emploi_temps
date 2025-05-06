@@ -1,4 +1,4 @@
-import { Controller, Delete, Get , Post, Put} from "@nestjs/common";
+import { Body, Controller, Delete, Get , Post, Put} from "@nestjs/common";
 import { EnseignantService } from "./enseignant.service";
 import { Enseignant } from "./enseignant.entity";
 
@@ -12,7 +12,7 @@ export class EnseignantController{
     }
 
     @Post()
-    async createEnseignant(enseignant : Enseignant)
+    async createEnseignant(@Body() enseignant : Partial<Enseignant>)
     {
         return this.enseignantService.create(enseignant);
     }

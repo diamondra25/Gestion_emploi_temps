@@ -9,7 +9,7 @@ export class MentionService{
     @InjectRepository(Mention)
     private readonly mentionRepository: Repository<Mention>){}
 
-    async createMention(mention: Mention): Promise<Mention> {
+    async createMention(mention: Partial<Mention>): Promise<Mention> {
         return this.mentionRepository.save(mention);
     }
 

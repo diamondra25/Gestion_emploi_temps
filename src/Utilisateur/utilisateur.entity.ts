@@ -19,11 +19,11 @@ export class Utilisateur{
     @Column({default: false})
     approuve: boolean
 
-    @OneToOne(()=>Enseignant, (enseignant)=>enseignant.utilisateur)
+    @OneToOne(()=>Enseignant, {nullable: true})
     @JoinColumn()
     enseignant? : Enseignant;
 
-    @OneToOne(()=>Etudiant, (etudiant)=>etudiant.utilisateur)
+    @OneToOne(()=>Etudiant,  {nullable: true})
     @JoinColumn()
     etudiant? : Etudiant;
 }

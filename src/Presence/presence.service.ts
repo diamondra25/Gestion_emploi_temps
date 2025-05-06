@@ -2,8 +2,8 @@ import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/
 import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Presence, PresenceDto } from "./presence.entity";
-import { Cours } from "src/Cours/cours.entity";
-import { Etudiant } from "src/Utilisateur/Etudiant/etudiant.entity";
+import { Cours } from "../Cours/cours.entity";
+import { Etudiant } from "../Utilisateur/Etudiant/etudiant.entity";
 
 @Injectable()
 export class PresenceService {

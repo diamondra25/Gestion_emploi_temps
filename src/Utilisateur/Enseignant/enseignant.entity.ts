@@ -1,5 +1,4 @@
 import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Utilisateur } from "../utilisateur.entity";
 import { Matiere } from "../../Matiere/matiere.entity";
 import { Disponibilite } from "../../Disponibilite/disponibilite.entity";
 
@@ -13,9 +12,6 @@ export class Enseignant{
 
     @Column({unique: true})
     prenom :string;
-
-    @OneToOne(()=>Utilisateur, (utilisateur)=>utilisateur.enseignant)
-    utilisateur : Enseignant;
 
     @OneToMany(()=>Disponibilite, (disponibilite)=>disponibilite.enseignant)
     disponibilite : Disponibilite[];
