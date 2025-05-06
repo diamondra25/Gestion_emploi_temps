@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get , Post, Put} from "@nestjs/common";
+import { Body, Controller, Delete, Get , Param, Post, Put} from "@nestjs/common";
 import { EnseignantService } from "./enseignant.service";
 import { Enseignant } from "./enseignant.entity";
 
@@ -18,7 +18,7 @@ export class EnseignantController{
     }
 
     @Put(':id')
-    async updateEnseignant(id : number, enseignant : Enseignant) {
+    async updateEnseignant( @Param('id')id : number, @Body() enseignant : Enseignant) {
         return this.enseignantService.update(id, enseignant);
     }
 

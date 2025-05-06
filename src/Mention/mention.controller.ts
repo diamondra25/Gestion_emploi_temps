@@ -22,8 +22,8 @@ export class MentionController{
     }
 
     @Put(':id')
-    async updateMention(@Body() mention: Mention): Promise<Mention> {
-        return this.mentionService.update(mention.id_mention, mention);
+    async updateMention(@Param('id') id :number, @Body()mention: Mention): Promise<Mention> {
+        return this.mentionService.update(id, mention);
     }
 
     @Delete(':id')

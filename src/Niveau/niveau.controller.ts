@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Body, Param } from "@nestjs/common";
 import { NiveauService } from "./niveau.service";
 import { Niveau } from "./niveau.entity";
 
@@ -17,12 +17,12 @@ export class NiveauController {
     }
 
     @Put(':id')
-    async updateNiveau(@Body() niveau: Niveau): Promise<Niveau> {
-        return this.niveauService.update(niveau.id_niveau, niveau);
+    async updateNiveau(@Param('id') id: string, @Body() niveau: Niveau): Promise<Niveau> {
+        return this.niveauService.update(id, niveau);
     }
 
     @Delete(':id')
-    async deleteNiveau(@Body() id: string): Promise<void> {
+    async deleteNiveau(@Param('id') id: string): Promise<void> {
         return this.niveauService.delete(id);
     }
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { MatiereService } from "./matiere.service";
 import { Matiere } from "./matiere.entity";
 
@@ -6,23 +6,23 @@ import { Matiere } from "./matiere.entity";
 export class MatiereController{
     constructor(private matiereService :MatiereService){}
 
-    @Get('all')
+    @Get()
     async getAllMatiere(){
         return this.matiereService.getAllMatiere();
     }
 
     @Get('enseignantmatiere/:id_enseignant')
-    async getMatiereforEnseignant(id_enseignant: number) {
+    async getMatiereforEnseignant(@Param('id_enseignant') id_enseignant: number) {
         return this.matiereService.getMatiereforEnseignant(id_enseignant);
     }
 
-    @Post('create')
+    @Post()
     async createMatiere(@Body() matiere: Matiere) {
         return this.matiereService.createMatiere(matiere);
     }
 
     @Delete(':id')
-    async deleteMatiere(id: number) {
+    async deleteMatiere(@Param('id') id: number){
         return this.matiereService.delete(id);
     }
 }

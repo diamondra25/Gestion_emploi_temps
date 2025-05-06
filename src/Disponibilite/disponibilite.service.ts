@@ -41,14 +41,22 @@ export class DisponibiliteService{
     }
     
     
-    async findDisponibilityforSpecificWeek(id_enseignant: number, date: Date): Promise<Disponibilite[]> {
-        const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
-        const endOfWeek = new Date(date.setDate(date.getDate() + 6 - date.getDay()));
-
+    async findDisponibilityforSpecificWeek(id_enseignant: number, dateparam: string): Promise<Disponibilite[]> {
+       const date = new Date(dateparam); 
+        const startOfWeek = new Date(date);
+        startOfWeek.setDate(date.getDate() - date.getDay() + 1);
+        startOfWeek.setHours(0, 0, 0, 0);
+    
+        const endOfWeek = new Date(date);
+        endOfWeek.setDate(date.getDate() + (7 - date.getDay()));
+        endOfWeek.setHours(23, 59, 59, 999);
+    
+        const startDateStr = startOfWeek.toISOString().slice(0, 10); 
+        const endDateStr = endOfWeek.toISOString().slice(0, 10);  
         return this.disponibiliteRepository.createQueryBuilder("disponibilite")
-            .where("disponibilite.enseignantId = :id_enseignant", { id_enseignant })
-            .andWhere("disponibilite.dispo_fin >= :startOfWeek", { startOfWeek })
-            .andWhere("disponibilite.dispo_debut <= :endOfWeek", { endOfWeek })
+        .where('disponibilite."enseignantIdEnseignant" = :id_enseignant', { id_enseignant })
+        .andWhere('disponibilite.dispo_fin::date >= :startDate', { startDate: startDateStr })
+        .andWhere('disponibilite.dispo_debut::date <= :endDate', { endDate: endDateStr })
             .getMany();
     }
 
@@ -71,9 +79,5 @@ export class DisponibiliteService{
             throw new Error(`Disponibilite with id ${id} not found`);
         }
     }
-
-    
 }
 
-function toLocalDateTimeString(date: Date): string {
-    return date.toLocaleString("sv-SE", { timeZone: "Africa/Nairobi" }); }

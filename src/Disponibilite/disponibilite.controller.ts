@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { DisponibiliteService } from "./disponibilite.service";
 import { Disponibilite } from "./disponibilite.entity";
 
@@ -12,12 +12,12 @@ export class DisponibiliteController{
     }
     
     @Get('this-week/:id_enseignant')
-    async getDisponibilityThisWeek(id_enseignant: number) {
+    async getDisponibilityThisWeek(@Param('id_enseignant') id_enseignant: number) {
         return this.disponibiliteService.findDisponibilityThisWeek(id_enseignant);
     }
 
-    @Get('specific-week/:id_enseignant/:date')
-    async getDisponibilityforSpecificWeek(id_enseignant: number, date: Date) {
+    @Get('specific-week/:id_enseignant')
+    async getDisponibilityforSpecificWeek(@Param('id_enseignant')id_enseignant: number,@Body('date') date: string) {
         return this.disponibiliteService.findDisponibilityforSpecificWeek(id_enseignant, date);
     }
 
@@ -27,12 +27,12 @@ export class DisponibiliteController{
     }
 
     @Put(':id')
-    async updateDisponibility(id: number, disponibilite: Disponibilite) {
+    async updateDisponibility(@Param('id') id: number,@Body() disponibilite: Disponibilite) {
         return this.disponibiliteService.update(id, disponibilite);
     }
 
     @Delete(':id')
-    async deleteDisponibility(id: number) {
+    async deleteDisponibility(@Param('id')id: number) {
         return this.disponibiliteService.delete(id);
     }
 

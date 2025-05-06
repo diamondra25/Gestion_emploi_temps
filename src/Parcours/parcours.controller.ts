@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Body, Param } from "@nestjs/common";
 import { ParcoursService } from "./parcours.service";
 import { Parcours } from "./parcours.entity";
 
@@ -17,12 +17,12 @@ export class ParcoursController{
     }
 
     @Put(':id')
-    async updateParcours(@Body() parcours: Parcours): Promise<Parcours> {
-        return this.parcoursService.update(parcours.id_parcours, parcours);
+    async updateParcours(@Param('id') id: number, @Body() parcours: Parcours): Promise<Parcours> {
+        return this.parcoursService.update(id, parcours);
     }
 
     @Delete(':id')
-    async deleteParcours(@Body() id: number): Promise<void> {
+    async deleteParcours(@Param('id') id: number): Promise<void> {
         return this.parcoursService.delete(id);
     }
 

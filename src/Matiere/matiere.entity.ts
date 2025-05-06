@@ -10,7 +10,7 @@ export class Matiere{
     @Column()
     nom_matiere : string;
 
-    @ManyToOne(()=>Enseignant, (enseignant)=> enseignant.matiere)
+    @ManyToOne(()=>Enseignant, (enseignant)=> enseignant.matiere, {nullable: false})
     @JoinColumn()
     enseignant : Enseignant;
 

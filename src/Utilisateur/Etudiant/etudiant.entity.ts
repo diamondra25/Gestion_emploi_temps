@@ -1,5 +1,4 @@
 import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryColumnCannotBeNullableError } from "typeorm";
-import { Utilisateur } from "../utilisateur.entity";
 import { Classe } from "../../Classe/classe.entity";
 
 @Entity()
