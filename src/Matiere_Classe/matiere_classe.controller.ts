@@ -7,7 +7,6 @@ import { Matiere_Classe } from "./matiere_classe.entity";
 @Controller('matiere_classe')
 export class MatiereClasseController {
     constructor(
-        @InjectRepository(Matiere_Classe)
          private readonly matiere_classeService :MatiereClasseService){}
 
     @Get()
@@ -26,7 +25,7 @@ export class MatiereClasseController {
     };
 
     @Put(':id')
-    async update(@Param('id') id: number, @Body() data: Partial<Matiere_Classe>) : Promise<Matiere_Classe> {
+    async update(@Param('id') id: number, @Body() data: Matiere_Classe) : Promise<Matiere_Classe> {
         return await this.matiere_classeService.update(id, data)
     };
 

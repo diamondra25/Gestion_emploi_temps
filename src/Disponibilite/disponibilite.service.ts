@@ -65,10 +65,16 @@ export class DisponibiliteService{
     }
 
     async create(disponibilite: Disponibilite): Promise<Disponibilite> {
+        if (!disponibilite.enseignant?.id_enseignant) {
+            throw new Error('Enseignant manquant');
+        }
         return await this.disponibiliteRepository.save(disponibilite);
     }
 
     async update(id: number, disponibilite: Disponibilite): Promise<Disponibilite> {
+        if (!disponibilite.enseignant?.id_enseignant) {
+            throw new Error('Enseignant manquant');
+        }
         await this.disponibiliteRepository.update(id, disponibilite);
         const result = await this.disponibiliteRepository.findOneBy({id_disponibilite: id});
         if (!result) {

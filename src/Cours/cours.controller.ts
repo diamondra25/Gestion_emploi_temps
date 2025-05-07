@@ -17,7 +17,7 @@ export class CoursController{
     }
 
     @Get('AllCoursForSpecificWeek')
-    async getAllCoursForSpecificWeek(@Body('date') date: Date): Promise<Cours[]> {
+    async getAllCoursForSpecificWeek(@Body('date') date: string): Promise<Cours[]> {
         return this.coursService.getCoursForSpecificWeek(date);
     } 
 

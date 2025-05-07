@@ -17,7 +17,7 @@ export class EnseignantService{
                 return this.enseignantRepository.find();
             }
         
-            async findOne(id : number): Promise<Enseignant>{
+            async findOne(id : string): Promise<Enseignant>{
                 const etudiant = await this.enseignantRepository.findOneBy({id_enseignant: id});
                 if (!etudiant) {
                     throw new Error(`L'enseignant avec l'identifiant : ${id} n'existe pas`);
@@ -31,7 +31,11 @@ export class EnseignantService{
                 
               }
             
-              async update(id: number, enseignant: Partial<Enseignant>): Promise<Enseignant> {
+              async update(id: string, enseignant: Partial<Enseignant>): Promise<Enseignant> {
+                const ens_update = await this.findOne(id);
+                if (!ens_update) {
+                    throw new Error(`L'enseignant avec l'identifiant : ${id} n'existe pas`);
+                }
                  await this.enseignantRepository.update(id, enseignant);
                  const enseignantx = await this.enseignantRepository.findOne({ where: { id_enseignant: id } });
                  if (!enseignantx) {
@@ -40,7 +44,11 @@ export class EnseignantService{
                  return enseignantx;
               }
             
-              async remove(id: number): Promise<void> {
+              async remove(id: string): Promise<void> {
+                const ens_update = await this.findOne(id);
+                if (!ens_update) {
+                    throw new Error(`L'enseignant avec l'identifiant : ${id} n'existe pas`);
+                }
                 await this.enseignantRepository.delete(id);
               }
 }

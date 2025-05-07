@@ -31,6 +31,8 @@ export class CoursDTO{
     cours_debut : Date;
     cours_fin : Date;
     status :Status;
+    salle : Salle;
+    matiere_classes: Matiere_Classe;
     qrCodeToken: string;
 }
 

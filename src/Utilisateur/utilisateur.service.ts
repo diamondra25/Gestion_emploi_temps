@@ -28,10 +28,16 @@ export class UtilisateurService{
     }
 
     async create(user: Partial<Utilisateur>): Promise<Utilisateur> {
+        if(!user.enseignant?.id_enseignant && !user.etudiant?.matricule) {
+            throw new Error("L'utilisateur doit être soit un enseignant soit un étudiant.");
+        }
         return this.utilisateurRepository.save(user);
       }
     
       async update(id: number, user: Partial<Utilisateur>): Promise<Utilisateur> {
+        if(!user.enseignant?.id_enseignant && !user.etudiant?.matricule) {
+            throw new Error("L'utilisateur doit être soit un enseignant soit un étudiant.");
+        }
          await this.utilisateurRepository.update(id, user);
          const utilisateur = await this.utilisateurRepository.findOne({ where: { id_utilisateur: id } });
          if (!utilisateur) {
@@ -41,10 +47,10 @@ export class UtilisateurService{
       }
     
       async remove(id: number): Promise<void> {
+        
         await this.utilisateurRepository.delete(id);
       }
 
-      //Approuver l'inscription d'un utilisateur
       async approved(id: number): Promise<Utilisateur> {
         const utilisateur = await this.utilisateurRepository.findOne({ where: { id_utilisateur: id } });
         if (!utilisateur) {

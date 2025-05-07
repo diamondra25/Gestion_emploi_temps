@@ -11,7 +11,7 @@ export class ClasseService{
     ){}
 
     async createClasse(classe: Classe): Promise<Classe> {
-        if(!classe.parcours.id_parcours || !classe.niveau.id_niveau){
+        if(!classe.parcours.id_parcours || !classe.niveau.id_niveau ){
             throw new Error('Parcours ou niveau manquant');
         }
         return this.classeRepository.save(classe);
@@ -25,6 +25,9 @@ export class ClasseService{
         const classeToUpdate = await this.classeRepository.findOneBy({id_parcours : id_parcours, id_niveau : id_niveau});
         if (!classeToUpdate) {
             throw new Error('Classe introuvable');
+        }
+        if(!classe.parcours.id_parcours || !classe.niveau.id_niveau ){
+            throw new Error('Parcours ou niveau manquant');
         }
         await this.classeRepository.update({id_parcours : id_parcours, id_niveau : id_niveau}, classe);
         return classe;

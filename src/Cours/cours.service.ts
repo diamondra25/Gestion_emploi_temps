@@ -12,6 +12,10 @@ export class CoursService{
         private readonly coursRepository: Repository<Cours>){}
    
     async createCours(coursDto: CoursDTO): Promise<{ cours: Cours; qrCode: string }> {
+        if(!coursDto.matiere_classes.id_mc){
+            throw new Error('Matiere_Classe manquant');
+
+        }
         const token = crypto.randomBytes(16).toString('hex');
         const cours = this.coursRepository.create({ ...coursDto, qrCodeToken: token });
         const saved = await this.coursRepository.save(cours);
@@ -48,7 +52,7 @@ export class CoursService{
         }
         await this.coursRepository.delete({
             id_cours: id
-        });
+        }); 
     }
 
     async getAllCoursThisWeek(): Promise<Cours[]> {
@@ -61,7 +65,8 @@ export class CoursService{
             .getMany();
     }
 
-    async getCoursForSpecificWeek(date: Date) : Promise<Cours[]> {
+    async getCoursForSpecificWeek(x: string) : Promise<Cours[]> {
+        const date = new Date(x);
         const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
         const endOfWeek = new Date(date.setDate(date.getDate() + 6));
         return this.coursRepository.createQueryBuilder('cours')

@@ -22,14 +22,23 @@ export class MatiereClasseService {
     }
 
     async create(data : Matiere_Classe) : Promise<Matiere_Classe>{
-        if(!data.matiere.id_matiere || !data.classe.id_niveau || !data.classe.id_parcours || !data.classe.groupe){
+        if(!data.matiere?.id_matiere || !data.classe?.id_niveau || !data.classe?.id_parcours || !data.classe?.groupe){
             throw new Error('Matiere ou classe manquante');
+        }
+        if(!data.enseignant?.id_enseignant){
+            throw new Error('Enseignant manquant');
         }
         const mc = this.matiere_classeRepository.create(data);
         return await this.matiere_classeRepository.save(data);
     }
 
     async update(id : number, data: Partial<Matiere_Classe>) : Promise<Matiere_Classe>{
+        if(!data.matiere?.id_matiere || !data.classe?.id_niveau || !data.classe?.id_parcours || !data.classe?.groupe){
+            throw new Error('Matiere ou classe manquante');
+        }
+        if(!data.enseignant?.id_enseignant){
+            throw new Error('Enseignant manquant');
+        }
         await this.matiere_classeRepository.update(id, data);
         const mc= await this.matiere_classeRepository.findOne({where: {id_mc: id}});
         if (!mc){

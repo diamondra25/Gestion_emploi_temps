@@ -18,12 +18,12 @@ export class EnseignantController{
     }
 
     @Put(':id')
-    async updateEnseignant( @Param('id')id : number, @Body() enseignant : Enseignant) {
+    async updateEnseignant( @Param('id')id : string, @Body() enseignant : Enseignant) {
         return this.enseignantService.update(id, enseignant);
     }
 
     @Delete(':id')
-    async deleteEnseignant(id : number) {
+    async deleteEnseignant(id : string) {
         return this.enseignantService.remove(id);
     }    
 }

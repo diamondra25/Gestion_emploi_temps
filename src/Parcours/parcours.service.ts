@@ -21,6 +21,9 @@ export class ParcoursService{
     }
 
     async update(id: number, parcours: Parcours): Promise<Parcours> {
+        if(!parcours.mention.id_mention){
+            throw new Error('Mention manquante');
+        }
         const parcoursToUpdate = await this.parcoursRepository.findOneBy({id_parcours : id});
         if (!parcoursToUpdate) {
             throw new Error('Parcours introuvable');
