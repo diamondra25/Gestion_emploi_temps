@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Body, Param } from "@nestjs/common";
 import { SalleService } from "./salle.service";
 import { Salle } from "./salle.entity";
 
@@ -12,17 +12,17 @@ export class SalleController{
     }
 
     @Post()
-    async createSalle(salle: Salle): Promise<Salle> {
+    async createSalle ( @Body()salle: Salle): Promise<Salle> {
         return this.salleService.createSalle(salle);
     }
 
     @Put(':id_salle')
-    async updateSalle(id_salle: string, salle: Salle): Promise<Salle> {
+    async updateSalle( @Param('id_salle')id_salle: string,  @Body() salle: Salle): Promise<Salle> {
         return this.salleService.update(id_salle, salle);
     }
 
     @Delete(':id_salle')
-    async deleteSalle(id_salle: string): Promise<void> {
+    async deleteSalle(@Param('id_salle')id_salle: string): Promise<void> {
         return this.salleService.delete(id_salle);
     }
 

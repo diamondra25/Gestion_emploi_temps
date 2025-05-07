@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { EtudiantService } from "./etudiant.service";
 import { Etudiant } from "./etudiant.entity";
 
@@ -12,17 +12,17 @@ export class EtudiantController{
     }
 
     @Post()
-    async createEtudiant(etudiant : Etudiant){
+    async createEtudiant(@Body()etudiant : Etudiant){
         return this.etudiantService.create(etudiant);
     }    
 
     @Put(':id')
-    async updateEtudiant(id : string, etudiant : Etudiant) {
+    async updateEtudiant(@Param('id')id : string,@Body() etudiant : Etudiant) {
         return this.etudiantService.update(id, etudiant);
     }
 
     @Delete(':id')
-    async deleteEtudiant(id : string) {
+    async deleteEtudiant(@Param('id')id : string) {
         return this.etudiantService.remove(id);
     }
 }

@@ -50,9 +50,13 @@ export class DisponibiliteService{
         const endOfWeek = new Date(date);
         endOfWeek.setDate(date.getDate() + (7 - date.getDay()));
         endOfWeek.setHours(23, 59, 59, 999);
+
+        
     
         const startDateStr = startOfWeek.toISOString().slice(0, 10); 
         const endDateStr = endOfWeek.toISOString().slice(0, 10);  
+        console.log("Start of Week: ", startDateStr);
+        console.log("End of Week: ", endDateStr);
         return this.disponibiliteRepository.createQueryBuilder("disponibilite")
         .where('disponibilite."enseignantIdEnseignant" = :id_enseignant', { id_enseignant })
         .andWhere('disponibilite.dispo_fin::date >= :startDate', { startDate: startDateStr })

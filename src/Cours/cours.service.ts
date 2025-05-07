@@ -11,16 +11,12 @@ export class CoursService{
         @InjectRepository(Cours)
         private readonly coursRepository: Repository<Cours>){}
    
-        //creation de cours avec le qrcode
     async createCours(coursDto: CoursDTO): Promise<{ cours: Cours; qrCode: string }> {
         const token = crypto.randomBytes(16).toString('hex');
         const cours = this.coursRepository.create({ ...coursDto, qrCodeToken: token });
         const saved = await this.coursRepository.save(cours);
-        const qrCodeData = JSON.stringify({ id_matiere: cours.id_matiere,
-            id_niveau: cours.id_niveau,
-            id_parcours: cours.id_parcours,
-            id_salle: cours.id_salle,
-            cours_debut: cours.cours_debut,
+        const qrCodeData = JSON.stringify({ 
+            id_cours:saved.id_cours,
             token });
         const qrCodeImage = await QRCode.toDataURL(qrCodeData);
         return { cours: saved, qrCode: qrCodeImage };    }
@@ -30,44 +26,28 @@ export class CoursService{
     }
 
 
-    async update( cours : Cours) : Promise <Cours>{
+    async update( id : number, cours : Cours) : Promise <Cours>{
         const coursToUpdate = await this.coursRepository.findOneBy({
-            id_matiere: cours.id_matiere,
-            id_niveau: cours.id_niveau,
-            id_parcours: cours.id_parcours,
-            id_salle: cours.id_salle,
-            cours_debut: cours.cours_debut,
+            id_cours: id
         });   
         if (!coursToUpdate) {
             throw new Error('Cours introuvable');
         }
         await this.coursRepository.update({
-            id_matiere: cours.id_matiere,
-            id_niveau: cours.id_niveau,
-            id_parcours: cours.id_parcours,
-            id_salle: cours.id_salle,
-            cours_debut: cours.cours_debut,
+            id_cours: cours.id_cours,           
         }, cours);
         return cours;
     }
 
-    async delete (cours : Cours): Promise<void>{
+    async delete (id : number): Promise<void>{
         const coursToDelete = await this.coursRepository.findOneBy({
-            id_matiere: cours.id_matiere,
-            id_niveau: cours.id_niveau,
-            id_parcours: cours.id_parcours,
-            id_salle: cours.id_salle,
-            cours_debut: cours.cours_debut,
+            id_cours: id
         });
         if (!coursToDelete) {
             throw new Error('Cours introuvable');
         }
         await this.coursRepository.delete({
-            id_matiere: cours.id_matiere,
-            id_niveau: cours.id_niveau,
-            id_parcours: cours.id_parcours,
-            id_salle: cours.id_salle,
-            cours_debut: cours.cours_debut,
+            id_cours: id
         });
     }
 

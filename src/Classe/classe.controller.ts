@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Body, Param } from "@nestjs/common";
 import { ClasseService } from "./classe.service";
 import { Classe } from "./classe.entity";
 
@@ -12,17 +12,17 @@ export class ClasseController{
     }
 
     @Post()
-    async createClasse(classe: Classe): Promise<Classe> {
+    async createClasse(@Body()classe: Classe): Promise<Classe> {
         return this.classeService.createClasse(classe);
     }
 
     @Put(':id_parcours/:id_niveau')
-    async updateClasse(id_parcours: number, id_niveau: string, classe: Classe): Promise<Classe> {
+    async updateClasse(@Param('id_parcours')id_parcours: number,@Param('id_niveau') id_niveau: string, @Body()classe: Classe): Promise<Classe> {
         return this.classeService.update(id_parcours, id_niveau, classe);
     }
 
     @Delete(':id_parcours/:id_niveau')
-    async deleteClasse(id_parcours: number, id_niveau: string): Promise<void> {
+    async deleteClasse(@Param('id_parcours')id_parcours: number,@Param('id_niveau') id_niveau: string): Promise<void> {
         return this.classeService.delete(id_parcours, id_niveau);
     }
 }

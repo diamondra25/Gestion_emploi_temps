@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Body, Param } from "@nestjs/common";
 import { CoursService } from "./cours.service";
 import { Cours, CoursDTO } from "./cours.entity";
 
@@ -26,14 +26,14 @@ export class CoursController{
         return this.coursService.createCours(coursDto);
     }
 
-    @Put()
-    async updateCours(@Body() cours: Cours) : Promise<Cours> {
-        return this.coursService.update(cours);
+    @Put(':id')
+    async updateCours(@Param('id') id : number,@Body() cours: Cours) : Promise<Cours> {
+        return this.coursService.update(id, cours);
     }
 
     @Delete()
-    async deleteCours(@Body() cours: Cours) : Promise<void> {
-        return this.coursService.delete(cours);
+    async deleteCours(@Param('id') id : number) : Promise<void> {
+        return this.coursService.delete(id);
     }
 
     
