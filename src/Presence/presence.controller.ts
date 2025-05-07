@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Body } from "@nestjs/common";
 import { PresenceService } from "./presence.service";
 import { Presence, PresenceDto } from "./presence.entity";
-import { Etudiant } from "src/Utilisateur/Etudiant/etudiant.entity";
+import { Etudiant } from "../Utilisateur/Etudiant/etudiant.entity";
 
 @Controller('presence')
 export class PresenceController {

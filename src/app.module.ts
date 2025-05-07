@@ -39,14 +39,14 @@ import { Notification } from './Notification/notification.entity';
       database : 'gestion_emploi_temps',
       entities : [Utilisateur, Etudiant, Enseignant,
                   Disponibilite, Matiere, Mention, Matiere_Classe,
-                  Parcours, Niveau, Classe, Salle, Cours] ,
+                  Parcours, Niveau, Classe, Salle, Cours, Notification] ,
       synchronize: false,
       migrations: [__dirname + '/Migrations/*{.ts,.js}'],    
 
     }),
     TypeOrmModule.forFeature([Utilisateur, Etudiant, Enseignant,
       Disponibilite, Matiere, Mention, 
-      Parcours, Niveau, Classe, Salle, Cours, Notification]),
+      Parcours, Niveau, Classe, Salle, Cours,Matiere_Classe, Notification]),
 
     AuthModule,
     MentionModule,
