@@ -59,7 +59,8 @@ import { Notification } from './Notification/notification.entity';
     ClasseModule,
     CoursModule,
     SalleModule,
-    DisponibiliteModule, MatiereClasseModule,
+    DisponibiliteModule, 
+    MatiereClasseModule,
     NotificationModule
   ]
 })

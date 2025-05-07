@@ -10,6 +10,9 @@ export class ParcoursService{
         private readonly parcoursRepository: Repository<Parcours>){}
     
     async createParcours(parcours: Parcours): Promise<Parcours> {
+        if(!parcours.mention.id_mention){
+            throw new Error('Mention manquante');
+        }
         return this.parcoursRepository.save(parcours);
     }
 
@@ -22,6 +25,11 @@ export class ParcoursService{
         if (!parcoursToUpdate) {
             throw new Error('Parcours introuvable');
         }
+
+        if(!parcours.mention.id_mention){
+            throw new Error('Mention manquante');
+        }
+        
         await this.parcoursRepository.update(id, parcours);
         return parcours;
     }

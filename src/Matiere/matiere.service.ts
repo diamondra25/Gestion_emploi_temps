@@ -10,6 +10,9 @@ export class MatiereService{
     private readonly matiereRepository: Repository<Matiere>){}
 
     async createMatiere(matiere: Matiere): Promise<Matiere> {
+        if(!matiere.enseignant.id_enseignant){
+            throw new Error('Enseignant manquant');
+        }
         return this.matiereRepository.save(matiere);
     }
 

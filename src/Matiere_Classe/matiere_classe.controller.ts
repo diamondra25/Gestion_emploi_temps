@@ -2,8 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common"
 import { MatiereClasseService } from "./matiere_classe.service";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Matiere_Classe } from "./matiere_classe.entity";
-import { Repository } from "typeorm";
-import { error } from "console";
+
 
 @Controller('matiere_classe')
 export class MatiereClasseController {
@@ -12,9 +11,9 @@ export class MatiereClasseController {
          private readonly matiere_classeService :MatiereClasseService){}
 
     @Get()
-    async getAllMatiereClasse() {
-        return await this.matiere_classeService.getAllMatiereClasse()
-    };
+   async getAll() : Promise<Matiere_Classe[]> {
+        return await this.matiere_classeService.getAll();
+    }
 
     @Get(':id')
     async getOne(@Param('id')id: number)  : Promise<Matiere_Classe> {

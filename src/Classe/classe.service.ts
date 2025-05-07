@@ -11,6 +11,9 @@ export class ClasseService{
     ){}
 
     async createClasse(classe: Classe): Promise<Classe> {
+        if(!classe.parcours.id_parcours || !classe.niveau.id_niveau){
+            throw new Error('Parcours ou niveau manquant');
+        }
         return this.classeRepository.save(classe);
     }
 
