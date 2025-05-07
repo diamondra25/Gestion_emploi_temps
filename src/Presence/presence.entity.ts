@@ -19,11 +19,7 @@ export class Presence {
 
 export class PresenceDto {
     etudiantId: string;
-    id_niveau:string;
-    id_parcours: number;
-    id_matiere: number;
-    id_salle: string;
-    cours_debut: Date;
+    id_cours: number;
     token: string;
     latitude: number;
     longitude: number;

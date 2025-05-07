@@ -22,30 +22,24 @@ export class PresenceService {
     return this.presenceRepository.find({ relations: ['cours', 'etudiant'] });
   }
 
-  //presence pendant un cours
-  async getAllPresenceForSpecificCours(id_matiere: number, id_niveau: string, id_parcours: number, id_salle: string, cours_debut: Date): Promise<Presence[]> {  
+  async getAllPresenceForSpecificCours(id_cours: number): Promise<Presence[]> {  
     return this.presenceRepository.find({
       where: {
         cours: {
-          id_matiere,
-          id_niveau,
-          id_parcours,
-          id_salle,
-          cours_debut,
+          id_cours
         },
       },
       relations: ['cours', 'etudiant'],
     });
   }
 
-  //Listes des absents
-  async getAllMissedEtudiantDuringOneCours(id_matiere: number, id_niveau: string, id_parcours: number, id_salle: string, cours_debut: Date): Promise<Etudiant[]> {
+  async getAllMissedEtudiantDuringOneCours(id_cours: number): Promise<Etudiant[]> {
     return this.etudiantRepo.createQueryBuilder('etudiant')
     .leftJoin(
       'presence',
       'presence',
-      'etudiant.id_etudiant = presence.id_etudiant AND presence.id_cours = :idCours AND presence.date = :date',
-      { id_matiere, id_niveau, id_parcours, id_salle, cours_debut },
+      'etudiant.id_etudiant = presence.id_etudiant AND presence.id_cours = :idCours',
+      { id_cours},
     )
     .where('presence.id_etudiant IS NULL')
     .getMany();
@@ -53,11 +47,7 @@ export class PresenceService {
 
 
   async enregistrer(dto: PresenceDto) {
-    const cours = await this.coursRepo.findOneBy({ id_matiere: dto.id_matiere,
-        id_niveau: dto.id_niveau,
-        id_parcours: dto.id_parcours,
-        id_salle: dto.id_salle,
-        cours_debut: dto.cours_debut, });
+    const cours = await this.coursRepo.findOneBy({ id_cours: dto.id_cours });
     if (!cours || cours.qrCodeToken !== dto.token) {
       throw new UnauthorizedException('QR invalide');
     }
