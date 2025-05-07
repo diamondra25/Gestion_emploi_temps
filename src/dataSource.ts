@@ -10,6 +10,8 @@ import { Classe } from './Classe/classe.entity';
 import { Parcours } from './Parcours/parcours.entity';
 import { Mention } from './Mention/mention.entity';
 import { Salle } from './Salle/salle.entity';
+import { Matiere_Classe } from './Matiere_Classe/matiere_classe.entity';
+import { Notification } from './Notification/notification.entity';
 
 export default new DataSource({
   type: 'postgres',
@@ -28,8 +30,10 @@ export default new DataSource({
     Classe,
     Disponibilite,
     Matiere,
+    Matiere_Classe,
     Niveau,
     Cours,
+    Notification
   ],
   migrations: [__dirname + '/Migrations/*{.ts,.js}'],
     synchronize: false,

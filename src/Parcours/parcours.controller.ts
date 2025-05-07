@@ -25,6 +25,4 @@ export class ParcoursController{
     async deleteParcours(@Param('id') id: number): Promise<void> {
         return this.parcoursService.delete(id);
     }
-
-    
 }

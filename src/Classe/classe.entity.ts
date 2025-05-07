@@ -4,6 +4,7 @@ import { Niveau } from "../Niveau/niveau.entity";
 import { Parcours } from "../Parcours/parcours.entity";
 import { Etudiant } from "../Utilisateur/Etudiant/etudiant.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Matiere_Classe } from "../Matiere_Classe/matiere_classe.entity";
 
 @Entity()
 export class Classe{
@@ -13,7 +14,7 @@ export class Classe{
     @PrimaryColumn()
     id_niveau: string;
 
-    @Column()
+    @PrimaryColumn()
     groupe: group;
 
     @ManyToOne(()=>Parcours, (parcours)=>parcours.classe)
@@ -22,8 +23,8 @@ export class Classe{
     @ManyToOne(()=>Niveau, (niveau)=>niveau.classe)
     niveau : Niveau;
 
-    @ManyToOne(()=>Matiere, (matiere)=>matiere.classe)
-    matiere : Matiere;
+    @OneToMany(()=>Matiere_Classe, (matiere_classe)=> matiere_classe.classe)
+    matiere_classes : Matiere_Classe [];
 
     @OneToMany(()=>Etudiant, (etudiant)=>etudiant.classe)
     etudiant :Etudiant [];

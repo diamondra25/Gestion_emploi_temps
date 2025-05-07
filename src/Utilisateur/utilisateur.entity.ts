@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Enseignant } from "./Enseignant/enseignant.entity";
 import { Etudiant } from "./Etudiant/etudiant.entity";
+import { Notification } from "../Notification/notification.entity";
 
 @Entity()
 export class Utilisateur{
@@ -26,6 +27,9 @@ export class Utilisateur{
     @OneToOne(()=>Etudiant,  {nullable: true})
     @JoinColumn()
     etudiant? : Etudiant;
+
+    @OneToMany(()=>Notification, (notification) => notification.utilisateur, {nullable: true})
+    notification? : Notification[];
 }
 
  enum Role {
